@@ -1,0 +1,90 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: beige;
+    margin: 0;
+    padding: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vh;
+    /* background-image: url(https://cdn.pixabay.com/photo/2023/07/29/14/31/deer-8157052_1280.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0,0,0,.2); */
+}
+h1{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: blueviolet;
+}
+
+ input[type="text"],[type="number"]
+{
+    width: 100%;
+    padding: 5px;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    font-size: 10px;
+
+
+}
+select{
+    width: 80%;
+    padding: 5px;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    font-size: 10px;
+}
+label{
+    display: block;
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: solid;
+    color: rgb(10, 149, 10);
+    /* color: rgb(131, 11, 244); */
+}   
+
+.form-group{
+    color: #24292e;
+    background-color: rgba(0,0,0,.2);
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    padding: 3px 50px;
+    /* border: 5px solid rgba(27,31,35,.2); */
+    border-radius: 3px;
+    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+    background-image: url(https://cdn.pixabay.com/photo/2023/07/29/14/31/deer-8157052_1280.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgba(245,245,245,.7);
+    margin: auto;
+    font-weight: 2000;
+    width: 300px;
+    height:600px;
+} 
+
+/* .form-group{
+    color: #24292e;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 3px 10px;
+    border: 1px solid rgba(27,31,35,.2);
+    border-radius: 3px;
+    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+    margin-left: 4px;
+    font-weight: 600;
+  } */
+
+.btn-group{
+    padding: 10px 10px;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+} 

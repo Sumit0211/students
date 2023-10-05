@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- <title>Kendo Grid Example</title>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.2.616/styles/kendo.common.min.css" />
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.2.616/styles/kendo.default.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://kendo.cdn.telerik.com/2021.2.616/js/kendo.all.min.js"></script> -->
+
+</head>
+
+<body>
+<div>
+    <h1> Student Report Card</h1>
+</div>
+
+<div class="form-group">
+    <form [formGroup]="reportForm">
+
+        <div>
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" formControlName="studentName" />
+            <div *ngIf="reportForm.get('studentName')?.hasError('required') && reportForm.get('studentName')?.touched">
+                Student Name is required.
+            </div>
+            <div *ngIf="reportForm.get('studentName')?.hasError('maxlength') && reportForm.get('studentName')?.touched">
+                Maximum length is 100 characters.
+                        </div>       
+        </div>
+
+        <div>
+            <label for="standard">Standard:</label>
+            <select id="standard" formControlName="standard">
+                <option value="" disabled>Select Standard</option>
+                <option *ngFor="let std of standards" [value]="std">{{ std }}</option>
+
+            </select>
+
+            <div *ngIf="reportForm.get('standard')?.hasError('required') && reportForm.get('standard')?.touched">
+
+                Standard is required.
+
+            </div>
+
+        </div>
+        <div *ngFor="let subject of subjects">
+            <label for="{{ subject }}">{{ subject | titlecase }}:</label>
+            <input type="number" [id]="subject" [formControlName]="subject" />
+            <div *ngIf="reportForm.get(subject)?.hasError('required') && reportForm.get(subject)?.touched">
+                {{ subject | titlecase }} is required.
+            </div>
+
+            <div
+                *ngIf="(reportForm.get(subject)?.hasError('min') || reportForm.get(subject)?.hasError('max')) && reportForm.get(subject)?.touched">
+                {{ subject | titlecase }} should be between 0 and 100.
+            </div>
+
+        </div>
+        <div *ngIf="reportGenerated">
+            <label>Percentage :</label>
+            <p *ngIf="reportForm.valid">{{ calculatePercentage() }}%</p>
+        </div>
+        <div class="btn-group">
+            <button type="button" (click)="generateReport()">Generate Report</button>
+            <button type="button" (click)="onReset()">Reset</button>
+            <button type="button" (click)="saveReport()">Save</button>
+        </div>
+    </form>
+</div>
+<div *ngIf="showGrid">
+
+    <kendo-grid
+  [data]="gridView"
+  [pageSize]="pageSize"
+  [skip]="skip"
+  [sort]="sort"
+  [sortable]="true"
+  [pageable]="true"
+  (dataStateChange)="dataStateChange($event)"
+  (pageChange)="pageChange($event)" 
+  
+>
+
+    <kendo-grid-column field="studentName" title="Student Name"></kendo-grid-column>
+    <kendo-grid-column field="standard" title="Standard"></kendo-grid-column>
+    <kendo-grid-column field="english" title="English"></kendo-grid-column>
+    <kendo-grid-column field="math" title="Math"></kendo-grid-column>
+    <kendo-grid-column field="science" title="Science"></kendo-grid-column>
+    <kendo-grid-column field="history" title="History"></kendo-grid-column>
+    <kendo-grid-column field="geography" title="Geography"></kendo-grid-column>
+    <kendo-grid-column field="percentage" title="Percentage" [sortable]="true"></kendo-grid-column>
+</kendo-grid>
+
+
+
+<div >
+    <kendo-chart [transitions]="false">
+      <kendo-chart-category-axis>
+        <kendo-chart-category-axis-item [categories]="['English', 'Math', 'Science', 'History', 'Geography']">
+        </kendo-chart-category-axis-item>
+      </kendo-chart-category-axis>
+      <kendo-chart-series>
+        <kendo-chart-series-item
+          *ngFor="let data of chartData" [data]="[data.english, data.math,data.science,data.history,data.geography]" type="column" [name]="data.studentName">
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+      <kendo-chart-title text="Report Card"></kendo-chart-title>
+        </kendo-chart>
+
+  </div>
+<!-- <div>
+    <canvas baseChart [datasets]="barChartData"
+     [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend">
+
+    </canvas>
+</div> -->
+
+</div>
+</body>
+</html>
